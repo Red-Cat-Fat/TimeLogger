@@ -14,6 +14,7 @@ namespace TimeLoggerProject
 	public partial class TimerForm : Form
 	{
 		private Stopwatch _stopwatch;
+
 		public TimerForm(Stopwatch mainStopwatch)
 		{
 			TopMost = true;
@@ -47,6 +48,7 @@ namespace TimeLoggerProject
 			var ts = _stopwatch.Elapsed;
 			var elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
 			TimerLabel.Text = elapsedTime;
+			NotifyIcon.Text = $"{Text}: {elapsedTime}";
 		}
 
 		private void MainTimerTick(object sender, EventArgs e)
@@ -54,5 +56,20 @@ namespace TimeLoggerProject
 			UpdateTime();
 		}
 
+		private void FormResize(object sender, EventArgs e)
+		{
+			if (this.WindowState == FormWindowState.Minimized)
+			{
+				this.Hide();
+				NotifyIcon.Visible = true;
+			}
+		}
+
+		private void NotifyIconMouseClick(object sender, MouseEventArgs e)
+		{
+			this.Show();
+			this.WindowState = FormWindowState.Normal;
+			NotifyIcon.Visible = false;
+		}
 	}
 }

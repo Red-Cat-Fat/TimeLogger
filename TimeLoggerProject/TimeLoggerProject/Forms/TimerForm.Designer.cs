@@ -29,12 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimerForm));
 			this.TimerLabel = new System.Windows.Forms.Label();
 			this.ButtonPanel = new System.Windows.Forms.Panel();
 			this.ButtonPause = new System.Windows.Forms.Button();
 			this.ButtonStop = new System.Windows.Forms.Button();
 			this.ButtonStart = new System.Windows.Forms.Button();
 			this.MainTimer = new System.Windows.Forms.Timer(this.components);
+			this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
 			this.ButtonPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -102,6 +104,13 @@
 			this.MainTimer.Interval = 10;
 			this.MainTimer.Tick += new System.EventHandler(this.MainTimerTick);
 			// 
+			// NotifyIcon
+			// 
+			this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+			this.NotifyIcon.Text = "Time Logger";
+			this.NotifyIcon.Visible = true;
+			this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIconMouseClick);
+			// 
 			// TimerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,8 +118,11 @@
 			this.ClientSize = new System.Drawing.Size(308, 71);
 			this.Controls.Add(this.ButtonPanel);
 			this.Controls.Add(this.TimerLabel);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "TimerForm";
-			this.Text = "TimerForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Time Logger";
+			this.SizeChanged += new System.EventHandler(this.FormResize);
 			this.ButtonPanel.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -125,5 +137,6 @@
 		private System.Windows.Forms.Button ButtonStart;
 		private System.Windows.Forms.Timer MainTimer;
 		private System.Windows.Forms.Button ButtonPause;
+		private System.Windows.Forms.NotifyIcon NotifyIcon;
 	}
 }
